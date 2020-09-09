@@ -1,0 +1,20 @@
+- name: Configuring AWS EC2 instance
+  hosts: localhost
+  vars_files:
+    - secure.yml
+
+  tasks:
+  - ec2:
+      key_name: "secondkey"
+      instance_type: "t2.micro"
+      image: "ami-0ebc1ac48dfd14136"
+      wait: yes
+      count: 1
+      vpc_subnet_id: "subnet-0a4d4862"
+      region: "ap-south-1"
+      assign_public_ip: yes
+      state: present
+      group_id: "sg-071b607cd3628c7b8"
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+
